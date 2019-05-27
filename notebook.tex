@@ -1,0 +1,1144 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Heart Disease - Lab 1}\label{heart-disease---lab-1}
+
+Martin Garcia, Joanna Duran, Daniel Byrne
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}402}]:} \PY{c+c1}{\PYZsh{}packages}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+          
+          \PY{c+c1}{\PYZsh{} plotting}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{color\PYZus{}codes}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+          \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+          
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{interactiveshell} \PY{k}{import} \PY{n}{InteractiveShell}
+          \PY{n}{InteractiveShell}\PY{o}{.}\PY{n}{ast\PYZus{}node\PYZus{}interactivity} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}
+          
+          \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+          \PY{k+kn}{import} \PY{n+nn}{warnings}
+          \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          
+          \PY{c+c1}{\PYZsh{}read the csv file}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{heart.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Business Understanding}\label{business-understanding}
+
+    The Cleveland Heart Disease Database, CHDD, produced in partnership with
+the V.A. Medical Center in Long Beach and Cleveland Clinic Foundation
+has grown to be a popular repository of heart disease specific
+measurable attributes. The
+\href{https://archive.ics.uci.edu/ml/datasets/Heart+Disease}{machine
+learning repository} hosting the dataset boasts 58 paper's citing it.
+
+The CHDD database has been used as the basis of multiple models of
+various complexity since its creation in 1998. The original model using
+logistic regression boasted a 77\% accuracy in predicting heart disease.
+Subsequent models have pushed that accuracy metric up past 80\% and to
+as high as 89\% in one model.
+
+    \subsubsection{Data Meaning Type}\label{data-meaning-type}
+
+The original CHDD dataset contains 76 attributes, but most published
+experiments, including the original, rely only 13 attributes from the
+dataset. We use data mining techniques to attempt to build a model to
+that tries to predict coronary artery disease, CAD, in patients from the
+13 commonly used attribute from the dataset. A description of the data
+points used in this model is in Table 1.
+
+The data used to derive the model originated from data collected from
+303 consecutive patients slated to receive a coronary angiography at the
+Cleveland Clinic between May 1981 and September 1984. None of the
+patients had a prior history or evidence of prior heart attack or known
+vascular or cardiomyopathic disease. Each patient provided a medical
+history and underwent a physical examination, provided electrocardiogram
+at rest, and provided a serum cholesterol fasting blood sugar
+measurement as part of a routine evaluation.
+
+Historical data were recorded and coded without knowledge of the
+additional test data. The patients also underwent 3 noninvasive tests,
+and exercise electrocardiogram, a thallium scintigraphy and a cardiac
+fluoroscopy. The results of these tests were not interpreted until after
+the angiogram was read.
+
+    \subparagraph{Table 1 - Data Parameter
+Descriptions}\label{table-1---data-parameter-descriptions}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.09\columnwidth}\raggedright\strut
+Data\strut
+\end{minipage} & \begin{minipage}[b]{0.44\columnwidth}\raggedright\strut
+Description\strut
+\end{minipage} & \begin{minipage}[b]{0.38\columnwidth}\raggedright\strut
+Attributes / Attribute Type / Scale / Values\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+Age\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Age in years\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+range 29 - 77 / numeric - ratio / continuous / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+sex\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Gender\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Male: 1 Female: 0 / categorical - nominal / discrete + binary /
+int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+cp\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Angina Categories / chest pain type\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Typical:0, Atypical:1, Non-Anginal:2, Asymptomatic:3 /
+categorical-ordinal / discrete\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+trestbps\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Resting Blood Pressure (mm Hg - unit of pressure )\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+range 94- 200 / numeric - / continuous / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+chol\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Serum Cholesterol and Triglycerides (mg/dl - milligrams per
+deciliter)\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+range 126 - 564 / numeric / continuous / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+fbs\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Fasting Blood Sugar \textgreater{} 120 (mg/dl)\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+True:1 False:0 / discrete + binary / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+restecg\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Resting Electrocardiogram\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Normal: 0, Abnormal:1, 2:Probable Ventricular Hypertrophy / thickening
+heart walls\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+thalach\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Maximum Heart Rate\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+range 71- 202 / numeric / continuous / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+exang\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Exercise Induced Angina\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Yes: 1, No: 0 / categorical- / discrete + binary\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+oldpeak\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+ST Depression Induced by Exercise Relative to Rest\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+range 0 - 6.2 / numeric / float64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+slope\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Slope of the Peak Exercise ST Segment\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Upsloping:1, Flat:2, Downsloping:3 / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+ca\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Number of Major Vessels Colored by Fluoroscopy\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Count with range 0-3 / int64\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+thal\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Thalassemia - blood disorder, less hemoglobin and red blood counts\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+3: Normal, 6: fixed defect, 7:reversable defect\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.09\columnwidth}\raggedright\strut
+target\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright\strut
+Heart Disease Present in Patient\strut
+\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Yes: 1, No: 0 / discrete+ binary / int64\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{Data Quality}\label{data-quality}
+
+    \paragraph{MIssing Values}\label{missing-values}
+
+In the 13 variables used in this evaluation, the dataset boasts no
+missing variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}367}]:} \PY{c+c1}{\PYZsh{}heatmap for missing values}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dataset Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Data Descriptions}\label{data-descriptions}
+
+Upon initial overview the dataset seemed very robust since every row has
+an entry for every attribute. While examining the data there seems to be
+some discrepancies in the descriptions provided from Kaggle as well as
+the original data source.
+
+\begin{itemize}
+\tightlist
+\item
+  For the category "slope", the provided description "Upsloping:1,
+  Flat:2, Downsloping:3" does not match the data set values of "0,1,2".
+\item
+  This represeents the same range shifted to 0
+\item
+  For the category "ca", the Kagle description "Count with range 0-3"
+  does not match the data set values of "0-4".
+\item
+  For the category "thal", the provided description "3: Normal, 6: fixed
+  defect, 7: reversable defect" does not match the data set values of
+  "0,1,2,3".
+\end{itemize}
+
+We investigated the Kaggle discussion boards to see if anybody else had
+answers. Some of the questions were also asked but no resolution was
+given.
+
+    \paragraph{Outlier analysis}\label{outlier-analysis}
+
+We plotted the continuous data points to get an intial sense of the
+potential outliers in the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}368}]:} \PY{c+c1}{\PYZsh{} matplotlib histograms of continuous variables}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trestbps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resting BPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cholesterol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thalach}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max HR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+              
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Serum Cholesterol and Triglycerides, chol, and Resting BPS, trestbps
+parameters have slightly left skewed distributions influenced by a small
+set of outliers on the high end of each variables range.
+
+The top 4 values of chol are all in the 99\%. Thus these 4 values are
+substantially larger than the 2Q value and thus in this dataset are
+outliers. These values will pull the mean up, and thus statistical
+analysis methods tools that use the mean to set confidence intervals and
+make predictions will be affected by these data points.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}369}]:} \PY{k}{def} \PY{n+nf}{mypercentile}\PY{p}{(}\PY{n}{score}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{stats}\PY{o}{.}\PY{n}{percentileofscore}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{score}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} top 5 chol levels  }
+          \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{n}{nearest} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{99}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Nearest Neighbor Data Point :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{nearest}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}369}]:}      chol
+          85    564
+          28    417
+          246   409
+          220   407
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+99\% Nearest Neighbor Data Point : 407
+
+    \end{Verbatim}
+
+    Likewise The top 4 values of trestbps are all in the 99\% as well. Thus
+these 4 values are substantially larger than the 2Q value and thus in
+this dataset are outliers. These values will pull the mean up, and thus
+statistical analysis methods tools that use the mean to set confidence
+intervals and make predictions will be affected by these data points.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}370}]:} \PY{c+c1}{\PYZsh{} top 5 trestbps levels}
+          \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trestbps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trestbps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{nearest} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trestbps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{99}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Nearest Neighbor Data Point :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{nearest}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}370}]:}      trestbps
+          223       200
+          248       192
+          266       180
+          110       180
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+99\% Nearest Neighbor Data Point : 180
+
+    \end{Verbatim}
+
+    \subsubsection{Simple Statistics}\label{simple-statistics}
+
+    The summary statistics of the continuous variables show that the average
+and the median age of each distribution are relatively close which is an
+indication of a tight variance. They also all seem to be relatively
+normally distributed. These characteristics opens them up for
+traditional statistical analysis methodologies.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}371}]:} \PY{c+c1}{\PYZsh{}Summary statistics for all observations/patients}
+          \PY{n}{stats} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+          \PY{n}{contstats} \PY{o}{=} \PY{n}{stats}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trestbps}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thalach}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{;}
+          \PY{n}{contstats}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}371}]:}               age    trestbps        chol     thalach
+          count  303.000000  303.000000  303.000000  303.000000
+          mean    54.366337  131.623762  246.264026  149.646865
+          std      9.082101   17.538143   51.830751   22.905161
+          min     29.000000   94.000000  126.000000   71.000000
+          25\%     47.500000  120.000000  211.000000  133.500000
+          50\%     55.000000  130.000000  240.000000  153.000000
+          75\%     61.000000  140.000000  274.500000  166.000000
+          max     77.000000  200.000000  564.000000  202.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}372}]:} \PY{c+c1}{\PYZsh{} matplotlib histograms of continuous variables}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+              
+              
+              \PY{c+c1}{\PYZsh{} Set up the boxes}
+              \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Draw the histograms}
+              \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{180}\PY{o}{/}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age of Participants}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{12}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trestbps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{180}\PY{o}{/}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resting Blood Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{12}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resting BPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{180}\PY{o}{/}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cholesterol and Triglycerides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{12}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Serum Cholesterol and Triglycerides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  
+                  
+              \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thalach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{180}\PY{o}{/}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maximum Heart Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{12}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heart Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Set the common y axis label}
+              \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=} \PY{l+m+mi}{8}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{CAD Target Analysis}\label{cad-target-analysis}
+
+There are more patients with the presence of heart disease (165) versus
+no presence of heart disease (138), but this is still a well distributed
+data set. However, the data does not represeent a random sample
+considering study participants were chosen from a group of patients
+reffered for coronary angiography. The assumption being that if a
+petient is referred for this procedure there is at least a concern that
+the patient referred could be at risk for CAD. Therefore, this study
+cannot be generalized to a wider population.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}373}]:} \PY{c+c1}{\PYZsh{} Aggregate by CAD, presence:1 = yes 0 = no}
+          \PY{n}{df\PYZus{}grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{df\PYZus{}grouped}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+target
+0    138
+1    165
+Name: target, dtype: int64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Pearson Correlaion Coeficient Matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}374}]:} \PY{c+c1}{\PYZsh{} CHDD Correlation matrix}
+          \PY{n}{corrm} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{corrm}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+               age       sex        cp  trestbps      chol       fbs  \
+age       1.000000 -0.098447 -0.068653  0.279351  0.213678  0.121308   
+sex      -0.098447  1.000000 -0.049353 -0.056769 -0.197912  0.045032   
+cp       -0.068653 -0.049353  1.000000  0.047608 -0.076904  0.094444   
+trestbps  0.279351 -0.056769  0.047608  1.000000  0.123174  0.177531   
+chol      0.213678 -0.197912 -0.076904  0.123174  1.000000  0.013294   
+fbs       0.121308  0.045032  0.094444  0.177531  0.013294  1.000000   
+restecg  -0.116211 -0.058196  0.044421 -0.114103 -0.151040 -0.084189   
+thalach  -0.398522 -0.044020  0.295762 -0.046698 -0.009940 -0.008567   
+exang     0.096801  0.141664 -0.394280  0.067616  0.067023  0.025665   
+oldpeak   0.210013  0.096093 -0.149230  0.193216  0.053952  0.005747   
+slope    -0.168814 -0.030711  0.119717 -0.121475 -0.004038 -0.059894   
+ca        0.276326  0.118261 -0.181053  0.101389  0.070511  0.137979   
+thal      0.068001  0.210041 -0.161736  0.062210  0.098803 -0.032019   
+target   -0.225439 -0.280937  0.433798 -0.144931 -0.085239 -0.028046   
+
+           restecg   thalach     exang   oldpeak     slope        ca  \
+age      -0.116211 -0.398522  0.096801  0.210013 -0.168814  0.276326   
+sex      -0.058196 -0.044020  0.141664  0.096093 -0.030711  0.118261   
+cp        0.044421  0.295762 -0.394280 -0.149230  0.119717 -0.181053   
+trestbps -0.114103 -0.046698  0.067616  0.193216 -0.121475  0.101389   
+chol     -0.151040 -0.009940  0.067023  0.053952 -0.004038  0.070511   
+fbs      -0.084189 -0.008567  0.025665  0.005747 -0.059894  0.137979   
+restecg   1.000000  0.044123 -0.070733 -0.058770  0.093045 -0.072042   
+thalach   0.044123  1.000000 -0.378812 -0.344187  0.386784 -0.213177   
+exang    -0.070733 -0.378812  1.000000  0.288223 -0.257748  0.115739   
+oldpeak  -0.058770 -0.344187  0.288223  1.000000 -0.577537  0.222682   
+slope     0.093045  0.386784 -0.257748 -0.577537  1.000000 -0.080155   
+ca       -0.072042 -0.213177  0.115739  0.222682 -0.080155  1.000000   
+thal     -0.011981 -0.096439  0.206754  0.210244 -0.104764  0.151832   
+target    0.137230  0.421741 -0.436757 -0.430696  0.345877 -0.391724   
+
+              thal    target  
+age       0.068001 -0.225439  
+sex       0.210041 -0.280937  
+cp       -0.161736  0.433798  
+trestbps  0.062210 -0.144931  
+chol      0.098803 -0.085239  
+fbs      -0.032019 -0.028046  
+restecg  -0.011981  0.137230  
+thalach  -0.096439  0.421741  
+exang     0.206754 -0.436757  
+oldpeak   0.210244 -0.430696  
+slope    -0.104764  0.345877  
+ca        0.151832 -0.391724  
+thal      1.000000 -0.344029  
+target   -0.344029  1.000000  
+    \end{verbatim}
+
+    
+    The chart below is the Pearson's Correlation Coeficient matrix graphed
+on a gradient. Purple is higher negative correlation, and green is the
+higher positive correlation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}375}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{matshow}\PY{p}{(}\PY{n}{corrm}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CHDD Correlation Matrix}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The correlation matrix gives us hints as wto which factors are
+correlated with CAD. In particular is evident that Exercise Induced
+Angina and Maximum HR are strongly correlated with the presence of CAD;
+whereas Cholesterol and Fasting Blood Sugar are not strongly correlated
+with CAD.
+
+    \paragraph{Gender Analysis}\label{gender-analysis}
+
+We grouped the dataset by gender to see if there were any gender
+specific trends in the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}376}]:} \PY{c+c1}{\PYZsh{}grouped further by sex, 1 = male, 0 = female}
+          
+          \PY{n}{df\PYZus{}grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{df\PYZus{}grouped}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+          
+          \PY{c+c1}{\PYZsh{}print (df\PYZus{}grouped.target.count())}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+target  sex
+0       0       24
+        1      114
+1       0       72
+        1       93
+Name: target, dtype: int64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When grouped by gender and the presence of CAD.
+
+\begin{itemize}
+\tightlist
+\item
+  In the group of patients that do show CAD (target 1), the distribution
+  is 93 males to 72 females, 1.3:1.
+\item
+  In the group that does not show CAD (target 0), the 114 males, 24
+  females without the disease. , 4.75:1
+\end{itemize}
+
+Since the source population for both groups is the same, this
+discrepancy alludes to a possible underlying factor which drives
+physician's to order a coronary angiography for males when at a higher
+rate than females event when the ultimate prognosis shows that the
+patient did meet the criteria for a CAD diagnosis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{n}{groupdes} \PY{o}{=} \PY{n}{df\PYZus{}grouped}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+          \PY{n}{groupdes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}377}]:}               age                                                        \textbackslash{}
+                      count       mean        std   min    25\%   50\%    75\%   max   
+          target sex                                                                
+          0      0     24.0  59.041667   4.964913  43.0  56.75  60.5  62.00  66.0   
+                 1    114.0  56.087719   8.385155  35.0  51.00  57.5  61.00  77.0   
+          1      0     72.0  54.555556  10.265337  34.0  46.00  54.0  63.25  76.0   
+                 1     93.0  50.903226   8.682897  29.0  44.00  52.0  57.00  70.0   
+          
+                         ca            {\ldots}   thalach        trestbps              \textbackslash{}
+                      count      mean  {\ldots}       75\%    max    count        mean   
+          target sex                   {\ldots}                                         
+          0      0     24.0  1.291667  {\ldots}    154.75  174.0     24.0  146.125000   
+                 1    114.0  1.140351  {\ldots}    156.00  195.0    114.0  131.929825   
+          1      0     72.0  0.305556  {\ldots}    167.25  192.0     72.0  128.736111   
+                 1     93.0  0.408602  {\ldots}    175.00  202.0     93.0  129.741935   
+          
+                                                                    
+                            std    min    25\%    50\%    75\%    max  
+          target sex                                                
+          0      0    21.436078  108.0  130.0  140.0  152.5  200.0  
+                 1    17.217361  100.0  120.0  130.0  140.0  192.0  
+          1      0    16.536765   94.0  119.5  130.0  140.0  180.0  
+                 1    15.955715   94.0  120.0  130.0  140.0  178.0  
+          
+          [4 rows x 96 columns]
+\end{Verbatim}
+            
+    The average age of those diagnosed with CAD also varied by gender.
+
+\begin{itemize}
+\tightlist
+\item
+  54 for females\\
+\item
+  50 for males
+\end{itemize}
+
+Females referred for coronary angiography without CAD have an average
+age of 59, which is higher than males at 56. However, the disparity in
+group sample size skews the mean comparison. Liekwise for female
+patients diagnosed with CAD, their average age was higher than males,
+54,50.
+
+    \paragraph{Resting Blood Pressure}\label{resting-blood-pressure}
+
+We noted that the trestbps (resting blood pressure) is higher for people
+without heart disease which seems to be contradictory.
+
+The Cleveland Clinic
+(https://health.clevelandclinic.org/6-myths-blood-pressure-heart-rate/)
+defines Optimal blood pressure as 120 mm Hg systolic --- which is the
+pressure as your heart beats --- over 80 mm Hg diastolic --- which is
+the pressure as your heart relaxes."
+
+Since our data only gives one number as opposed to the standard format
+of systolic over diastolic, we will assume that it is the systolic
+pressure. Given that assumption, all means of the target and non-target
+groups are in the above normal level. The correlation matrix also showed
+a weak correlation with resting BPs.
+
+The dataset indicates that female study participants without CAD had the
+highest BPS average, but this is ikely due to the fact that the highest
+trestbps for the entire data set belongs to a woman in that category.
+Since that group is so small, this outlying datapoint has skewed the
+mean higher. The median of this group probably give a better estimation
+of the true mean. The median for this group is 140 which is only a
+little lower than the average and it is 10 points higher than all the
+other medians so this is a trend that we need to further investigate.
+
+    \paragraph{Maximum Heart Rate}\label{maximum-heart-rate}
+
+In looking at thalach (maximum heart rate), there seems to be a very
+wide spread. According to the Mayo Clinic
+(https://www.mayoclinic.org/healthy-lifestyle/fitness/expert-answers/heart-rate/faq-20057979)
+heart rate is influenced by MANY factors such as: age, fitness and
+activity levels, smoker status, having cardiovascular disease, high
+cholesterol or diabetes, air temperature, body position (standing up or
+lying down, for example), emotions, body size, and medications. The
+article also explains the wide spread we observe; "Although there's a
+wide range of normal, an unusually high or low heart rate may indicate
+an underlying problem. Consult your doctor if your resting heart rate is
+consistently above 100 beats a minute (tachycardia) or if you're not a
+trained athlete and your resting heart rate is below 60 beats a minute
+(bradycardia)" According to the American heart association
+(https://www.heart.org/en/healthy-living/fitness/fitness-basics/target-heart-rates),
+for people age 50-54 (which is our average age) the Target HR Zone is
+83-140 bpm and Average Maximum Heart Rate is 170 bpm. There are a few
+data points that are above 170 and a considerable amount that are over
+the 140 bpm.
+
+    \subsubsection{Visualize Attributes}\label{visualize-attributes}
+
+    We plotted the parameters with the highest absolute correlation, grouped
+by sex to the Target and fit a linear model to these relationships to
+get a sense of their individual contributions to the response.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}397}]:} \PY{c+c1}{\PYZsh{} Plot data and regression model fits across a FacetGrid.}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thalach}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{chol}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{oldpeak}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}401}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{slope}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ca}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{thal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Explore Joint Attributes and
+Class}\label{explore-joint-attributes-and-class}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}403}]:} \PY{c+c1}{\PYZsh{}pull continuous numeric data}
+          \PY{n}{continuous\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trestbps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thalach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oldpeak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}changing to type float}
+          \PY{n}{df}\PY{p}{[}\PY{n}{continuous\PYZus{}features}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{continuous\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}matrix for continuous numeric data broken by heart disease presense, 1= yes 0=no}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{grid} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n+nb}{vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trestbps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thalach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oldpeak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{grid} \PY{o}{=} \PY{n}{grid}\PY{o}{.}\PY{n}{map\PYZus{}lower}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When our data is broken into two groups, consisting of those with
+evidence of CAD and without we see overlapping in attributes and also
+see noticeable differences. The matrix above contains the continuous
+variables from our original 13 explanatory variables, we see three
+different graphs including a correlation plot, density curve and
+bivariate density.
+
+The distributions show a steeper curve for those with heart disease.
+This applies to variables old peak and thalach. This translates to those
+with heart disease have a reversable blood disorder.
+
+Those with heart disease reflect an age distribution at age 60, in
+contrast the other group centers are age 75. Our matrix utilizing a
+distribution and correlation plot did no show major differences between
+male and females.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}385}]:} \PY{c+c1}{\PYZsh{}matrix broken down by gender, 1=male 0=female}
+          
+          \PY{n}{sex} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n+nb}{vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trestbps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{thalach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oldpeak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{husl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices\PYZus{}from}\PY{p}{(}\PY{n}{sex}\PY{o}{.}\PY{n}{axes}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{sex}\PY{o}{.}\PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We breakdown the data by gender to see if there are noticeable
+differences between males and females. While not much differences in age
+and trestbps, there are substantial differences in chol and thalach.
+Here we see that the high cholesterol point of 564 belongs to a female
+as well as 4 other high points belong to females. But even with those
+high values, overall females still have lower cholesterol levels than
+males. The thalach seems to be substantially higher for females than
+males. There also seems to be a negative correlation between thalach and
+age.
+
+    \subsubsection{New Features}\label{new-features}
+
+    The data set used is originally from the UCI machine learning
+repository. The kaggle version, which we used, is a simplified data set
+with reduced explanatory and response variables. The original repository
+has four different levels for our response, and not limited to heart
+disease presence only, or a simple discrete binary value. Adding
+additional response measure, we can get a better picture of what
+contributes to the heart disease at different levels.
+
+    \subsubsection{Exceptional Work}\label{exceptional-work}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}386}]:} \PY{c+c1}{\PYZsh{}splitting data into test and training sets, 30\PYZhy{}70 split}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} 
+                                                              \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{7}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.30}\PY{p}{,} 
+                                                              \PY{p}{)}
+          \PY{c+c1}{\PYZsh{}train and predict}
+          \PY{n}{logmodel} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{logmodel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{predictions} \PY{o}{=} \PY{n}{logmodel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}results}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{predictions}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}confusion matrix}
+          \PY{n}{CM} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{CM}\PY{p}{)}
+          
+          \PY{n}{ax}\PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{CM}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{}annot=True to annotate cells}
+          
+          \PY{c+c1}{\PYZsh{} labels, title and ticks}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True labels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} 
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Confusion Matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} 
+          \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{set\PYZus{}ticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}ticklabels}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+        0.0       0.89      0.65      0.75        48
+        1.0       0.70      0.91      0.79        43
+
+avg / total       0.80      0.77      0.77        91
+
+[[31 17]
+ [ 4 39]]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Our response is binary implying a logistic regression model to help us
+predict whether a patient has heart disease given the 13 explanatory
+variables. We used 70-30 split for our training and test sets
+respectively. The results are different when predicting those without
+and with heart disease. Our accuracy is higher for predicting patients
+without heart disease at the high 80\% range, ranging from 85-90\%.
+Predicting heart disease however is lower range of 80s, ranging from 79
+to 85\% during testing of several iterations.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
