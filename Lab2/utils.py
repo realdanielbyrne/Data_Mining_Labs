@@ -42,18 +42,21 @@ def load_cifar10_label_names():
     """
     return ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
-def simplify_labels(indexes):
+def simplify_labels(indexes, df):
     """
     Modify the label dataset to filter only the classes specified
 
     Arguments:
-    indexes to filter
-    label dataset
+    indees: indexes to filter
+    df : label dataset
 
     Returns:
-    dZ -- Gradient of the cost with respect to Z
+    fdf - filtered df
       
     """
+    with np.nditer(a, op_flags=['readwrite']) as it:
+        for x in it:
+            x[...] = 2 * x
 
 def sigmoid(Z):
     """
