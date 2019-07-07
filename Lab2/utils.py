@@ -3,6 +3,15 @@ import matplotlib.pyplot as plt
 import h5py
 
 
+#load the data
+X,Y,x_test,y_test = load_cfar10_dataset()
+
+# Simplify datasets to the classes we care about
+Ycatdog = simplify_labels(Y,[3,5],10)
+y_test_catdog =simplify_labels(y_test,[3,5],10)
+Ybirdplane = simplify_labels(Y,[0,2],10)
+y_test_birdplane = simplify_labels(y_test,[0,2],10)
+
 #load the data, reshape to 32x32 matrix per color, transpose matrices
 def load_cfar10_batch(path, batch_id = None, reshape = True):
     """
@@ -34,7 +43,55 @@ def load_cfar10_batch(path, batch_id = None, reshape = True):
     return X, Y
 
 
-#load labels for our label
+def buildmodel(nmodel,X,Y,**modelargs):
+    """
+    Builds one of a subset of sklearn models and returns a score
+    
+    Arguments:
+    modeltype -- One of either "multi", "gauss", "bernoulli", "c", "nn" 
+    
+    """
+
+    import sklearn.naive_bayes as b
+    from sklearn.neighbors import KNeighborsClassifier
+
+    if nmodel == 'multi':
+        m = b.MultinomialNB(**modelargs)
+    elif nmodel == 'gauss':
+        m = b.GaussianNB(**modelargs)
+    elif nmodel == 'bernoulli':
+        m = b.BernoulliNB(**modelargs)
+    elif nmodel == 'knn':
+        m = KNeighborsClassifier(**modelargs)
+
+    m.fit(X, Y)    
+
+    return m
+
+def load_cfar10_dataset():
+    """
+    Loads the cfar10 dataset
+    
+    Arguments: 
+        None
+    
+    Returns:
+        X - Training dataset
+        Y - Training labels
+         - Test datset
+        y_test - test labelss
+    """
+    x_test,y_test = load_cfar10_batch("data/test_batch",None,False)
+    X,Y = load_cfar10_batch("data/",1,False)
+
+    for n in range(2,6):
+        x,y = load_cfar10_batch("data/",n,False)    
+        X = np.concatenate((X,x),axis=0)
+        Y = np.concatenate((Y,y),axis=0)
+
+
+    return (X,Y,x_test,y_test)
+
 def load_cifar10_label_names():
     """
         Cifar-10 is a well known dataset, and thus the labels well known and static.  
